@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "dqvf": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "env": {
+        "SOURCE_DB_HOST": "${SOURCE_DB_HOST}",
+        "SOURCE_DB_PORT": "${SOURCE_DB_PORT}",
+        "SOURCE_DB_USER": "${SOURCE_DB_USER}",
+        "SOURCE_DB_PASSWORD": "${SOURCE_DB_PASSWORD}",
+        "SOURCE_DB_NAME": "${SOURCE_DB_NAME}",
+        "TARGET_DB_HOST": "${TARGET_DB_HOST}",
+        "TARGET_DB_PORT": "${TARGET_DB_PORT}",
+        "TARGET_DB_USER": "${TARGET_DB_USER}",
+        "TARGET_DB_PASSWORD": "${TARGET_DB_PASSWORD}",
+        "TARGET_DB_NAME": "${TARGET_DB_NAME}",
+        "ANTHROPIC_API_KEY": "${ANTHROPIC_API_KEY}",
+        "OPENAI_API_KEY": "${OPENAI_API_KEY}",
+        "SLACK_WEBHOOK_URL": "${SLACK_WEBHOOK_URL}",
+        "REPORT_OUTPUT_DIR": "./reports"
+      }
+    }
+  }
+}

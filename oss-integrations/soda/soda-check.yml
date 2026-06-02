@@ -1,0 +1,42 @@
+# Soda Core check configuration for post-migration validation
+# Usage: soda scan -d target_db -c soda-check.yml
+
+checks for customers:
+  - row_count > 0
+  - missing_count(customer_id) = 0
+  - duplicate_count(customer_id) = 0
+  - missing_percent(email) < 5%
+  - invalid_percent(email) < 2%:
+      valid format: email
+  - schema:
+      fail:
+        when required column missing:
+          - customer_id
+          - email
+          - created_at
+
+checks for orders:
+  - row_count > 0
+  - missing_count(order_id) = 0
+  - duplicate_count(order_id) = 0
+  - min(total_amount) >= 0
+  - freshness(created_at) < 2h
+  - schema:
+      fail:
+        when required column missing:
+          - order_id
+          - customer_id
+          - total_amount
+          - created_at
+
+checks for order_items:
+  - row_count > 0
+  - missing_count(item_id) = 0
+  - duplicate_count(item_id) = 0
+  - values in (order_id) must exist in orders (order_id)
+
+checks for products:
+  - row_count > 0
+  - missing_count(product_id) = 0
+  - duplicate_count(product_id) = 0
+  - missing_percent(name) = 0

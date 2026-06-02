@@ -1,0 +1,8 @@
+node_modules/
+dist/
+reports/*.json
+reports/*.html
+.env
+*.tsbuildinfo
+coverage/
+.DS_Store

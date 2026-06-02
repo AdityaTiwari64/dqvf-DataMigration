@@ -1,0 +1,48 @@
+# Elementary Data alerting configuration for post-migration monitoring
+# Integration: Add elementary as a dbt package in packages.yml
+
+version: 2
+
+# Elementary monitors
+monitors:
+  - name: freshness_monitor
+    type: freshness
+    tables:
+      - customers
+      - orders
+    severity: high
+    alert_after_hours: 2
+
+  - name: volume_monitor
+    type: volume_anomaly
+    tables:
+      - customers
+      - orders
+      - order_items
+      - products
+    severity: medium
+    sensitivity: 3  # standard deviations
+
+  - name: schema_monitor
+    type: schema_change
+    tables:
+      - customers
+      - orders
+    severity: high
+
+# Slack alerts
+alerts:
+  slack:
+    webhook_url: "${SLACK_WEBHOOK_URL}"
+    channel: "#data-quality"
+    alert_on:
+      - high
+      - medium
+    suppression_interval_hours: 1
+
+  # Email alerts (optional)
+  # email:
+  #   recipients:
+  #     - data-team@company.com
+  #   alert_on:
+  #     - high
